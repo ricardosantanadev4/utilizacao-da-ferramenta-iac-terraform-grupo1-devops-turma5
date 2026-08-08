@@ -24,6 +24,30 @@ Antes de utilizar o Terraform, é necessário possuir:
 Para exemplos que utilizem provedores de nuvem, também poderá ser necessário possuir uma conta e as respectivas credenciais configuradas.
 
 ---
+## 2.1 Sistemas operacionais compatíveis com o Terraform
+
+Antes de instalar o Terraform, você precisa verificar se o seu **sistema operacional e a arquitetura do processador** são compatíveis.
+
+Segundo a documentação oficial atual da HashiCorp, o Terraform possui builds para os seguintes sistemas: [HashiCorp Developer](https://developer.hashicorp.com/terraform/install)
+
+| Sistema operacional | Compatibilidade                                                  |
+| ------------------- | ---------------------------------------------------------------- |
+| **Windows**         | ✅ Suportado                                                      |
+| **macOS**           | ✅ Suportado                                                      |
+| **Linux**           | ✅ Suportado                                                      |
+| **FreeBSD**         | ⚠️ Disponível, mas fora da garantia principal de compatibilidade |
+| **OpenBSD**         | ⚠️ Disponível, mas fora da garantia principal                    |
+| **Solaris**         | ⚠️ Disponível, mas fora da garantia principal                    |
+
+## Arquitetura do processador também importa
+
+Além do sistema operacional, existe a **arquitetura**:
+
+| Sistema | Arquiteturas comuns                     |
+| ------- | --------------------------------------- |
+| Windows | `amd64`, `386`, `arm64`                 |
+| macOS   | `amd64`, `arm64`                        |
+| Linux   | `amd64`, `386`, `arm`, `arm64`, `s390x` |
 
 ## 3. Instalação do Terraform
 
@@ -43,6 +67,7 @@ Exemplo:
 Terraform vX.X.X
 ```
 
+**Fonte:** [Documentação oficial — Instalação do Terraform](https://developer.hashicorp.com/terraform/install)
 ---
 
 ## 4. Criando o primeiro projeto
