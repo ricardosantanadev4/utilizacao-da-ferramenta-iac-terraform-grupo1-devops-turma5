@@ -100,3 +100,65 @@ terraform-exemplo/
 ```
 
 ---
+
+## 5. Primeiro exemplo com Terraform
+
+Para realizar um primeiro exemplo simples, podemos utilizar o provider `local`.
+
+O exemplo abaixo cria um arquivo de texto utilizando o Terraform.
+
+### `main.tf`
+
+```hcl
+terraform {
+  required_providers {
+    local = {
+      source = "hashicorp/local"
+    }
+  }
+}
+
+provider "local" {}
+
+resource "local_file" "exemplo" {
+  filename = "exemplo.txt"
+  content  = "Meu primeiro recurso criado com Terraform!"
+}
+```
+
+### Entendendo o código
+
+O bloco `terraform` define informações necessárias para o funcionamento do projeto, incluindo os providers utilizados.
+
+```hcl
+terraform {
+  required_providers {
+    local = {
+      source = "hashicorp/local"
+    }
+  }
+}
+```
+
+O **provider** é responsável por permitir que o Terraform interaja com determinado serviço ou tecnologia.
+
+```hcl
+provider "local" {}
+```
+
+O bloco `resource` define um recurso que será gerenciado pelo Terraform.
+
+```hcl
+resource "local_file" "exemplo" {
+```
+
+Neste exemplo, o recurso é um arquivo local.
+
+```hcl
+filename = "exemplo.txt"
+content  = "Meu primeiro recurso criado com Terraform!"
+```
+
+Essas propriedades definem o nome e o conteúdo do arquivo que será criado.
+
+---
