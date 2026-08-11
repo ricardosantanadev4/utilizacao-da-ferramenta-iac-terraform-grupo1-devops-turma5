@@ -70,6 +70,171 @@ Terraform vX.X.X
 **Fonte:** [Documentação oficial — Instalação do Terraform](https://developer.hashicorp.com/terraform/install)
 ---
 
+## 3.1 Configurções adicionais sistema Windows
+
+Este exemplo mostra o passo a passo para sistemas **Windows 64 bits + processador Intel x64**, você deve utilizar a versão **Windows AMD64** do Terraform.
+
+## Baixar o Terraform
+
+Acesse a página oficial da HashiCorp:
+
+[Download oficial do Terraform](https://developer.hashicorp.com/terraform/install?utm_source=chatgpt.com)
+
+Procure por **Windows** e baixe a versão:
+
+```text
+Windows
+AMD64
+```
+
+O arquivo será parecido com:
+
+```text
+terraform_1.15.8_windows_amd64.zip
+```
+---
+
+## Extrair o arquivo ZIP
+
+Depois de baixar:
+
+1. Abra a pasta **Downloads**.
+2. Localize o arquivo `.zip`.
+3. Clique com o botão direito.
+4. Escolha **Extrair Tudo...**
+5. Extraia o conteúdo.
+
+Dentro da pasta extraída você encontrará:
+
+```text
+terraform.exe
+```
+
+Esse é o executável do Terraform.
+
+---
+
+## Criar uma pasta para o Terraform
+
+Recomendo colocar o Terraform em uma pasta própria.
+
+Abra o Explorador de Arquivos e crie:
+
+```text
+C:\Terraform
+```
+
+Então copie:
+
+```text
+terraform.exe
+```
+
+para:
+
+```text
+C:\Terraform
+```
+
+No final, deverá ficar:
+
+```text
+C:\Terraform\terraform.exe
+```
+
+---
+
+# Adicionar o Terraform ao PATH
+
+Essa é a parte mais importante da instalação.
+
+O **PATH** permite executar:
+
+```terminal
+terraform
+```
+
+de qualquer pasta do computador, sem precisar informar:
+
+```terminal
+C:\Terraform\terraform.exe
+```
+
+### Abra as configurações de variáveis de ambiente
+
+No menu Iniciar do Windows, pesquise:
+
+```text
+variáveis de ambiente
+```
+
+Selecione:
+
+**Editar as variáveis de ambiente do sistema**
+
+Na janela que abrir, clique em:
+
+**Variáveis de Ambiente...**
+
+---
+
+## Editar o Path
+
+Na parte de **Variáveis de usuário**, procure:
+
+```text
+Path
+```
+
+Selecione e clique em:
+
+**Editar**
+
+Depois:
+
+**Novo**
+
+Adicione:
+
+```text
+C:\Terraform
+```
+
+Clique em:
+
+**OK**
+
+Depois novamente em:
+
+**OK**
+
+e:
+
+**OK**
+
+---
+
+# Abrir um novo Terminal
+
+⚠️ Se você já tinha o terminal aberto, **feche-o e abra novamente**.
+
+Isso é necessário para que ele carregue o novo PATH.
+
+Abra o **Terminal**.
+
+Digite:
+
+```terminal
+terraform version
+```
+
+Se estiver tudo correto, aparecerá algo semelhante a:
+
+```text
+Terraform v1.15.8
+on windows_amd64
+```
+
 ## 4. Criando o primeiro projeto
 
 Crie uma pasta para o projeto:
