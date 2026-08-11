@@ -1,4 +1,3 @@
-```hcl
 terraform {
   required_providers {
     local = {
@@ -13,4 +12,3 @@ resource "local_file" "estado" {
   filename = "estado.txt"
   content  = "Exemplo de gerenciamento de estado com Terraform."
 }
-```
