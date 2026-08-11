@@ -279,6 +279,14 @@ terraform show
 
 O arquivo de estado é uma parte importante do funcionamento do Terraform e deve ser tratado com cuidado, principalmente quando o projeto é armazenado em um repositório Git.
 
+### Listando os recursos do estado
+
+Também é possível listar os recursos atualmente registrados no estado utilizando:
+
+```bash
+terraform state list
+```
+
 ---
 
 # 12. Outputs
@@ -433,6 +441,8 @@ Infraestrutura / recursos
        ↓
 terraform show
        ↓
+terraform state list
+       ↓
 terraform destroy
 ```
 
@@ -448,6 +458,7 @@ terraform destroy
 | `terraform plan`     | Mostra as alterações planejadas             |
 | `terraform apply`    | Aplica as alterações                        |
 | `terraform show`     | Exibe informações sobre o estado            |
+| `terraform state list` | Lista os recursos registrados no estado |
 | `terraform output`   | Exibe os outputs                            |
 | `terraform destroy`  | Remove os recursos gerenciados              |
 
