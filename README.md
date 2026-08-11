@@ -750,3 +750,36 @@ O Terraform possui foco principalmente no **provisionamento da infraestrutura**.
 Conforme o conteúdo apresentado em aula, o Terraform atua principalmente na criação da infraestrutura, enquanto ferramentas como Ansible são utilizadas para configurar o software dentro dessa infraestrutura.
 
 ---
+
+# 24. Exemplos dos integrantes
+
+Cada integrante do grupo desenvolveu um exemplo prático, disponível na pasta `exemplos/`:
+
+| Pasta | Tema |
+| --- | --- |
+| `exemplos/primeiro-recurso-criado-com-terraform-integrante-1-ricardo/` | Primeiro recurso (provider + resource) |
+| `exemplos/integrante-2/` | Variáveis |
+| `exemplos/part_6/` | Estado (terraform.tfstate) |
+| `exemplos/integrante-4/` | Múltiplos recursos |
+| `exemplos/integrante-7/` | Projeto completo (variáveis + recurso + outputs + ciclo) |
+
+---
+
+# 25. Divisão de tarefas
+
+| Integrante | Responsabilidade |
+| --- | --- |
+| Ricardo | Instalação, primeiro recurso, `terraform init` |
+| Lucas | Variáveis |
+| _(a definir)_ | Outputs |
+| Emanuel | Múltiplos recursos |
+| _(a definir)_ | Alterando a infraestrutura (plan/apply de mudança) |
+| _(a definir)_ | Estado (`terraform.tfstate`) |
+| Gabriela | Projeto completo (variáveis + recurso + outputs + ciclo completo) |
+
+---
+
+# 26. Referências
+
+* Documentação oficial do Terraform — https://developer.hashicorp.com/terraform
+* Documentação do provider local — https://registry.terraform.io/providers/hashicorp/local/latest/docs
