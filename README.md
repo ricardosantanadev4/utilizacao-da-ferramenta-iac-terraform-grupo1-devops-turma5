@@ -100,3 +100,488 @@ terraform-exemplo/
 ```
 
 ---
+
+## 5. Primeiro exemplo com Terraform
+
+Para realizar um primeiro exemplo simples, podemos utilizar o provider `local`.
+
+O exemplo abaixo cria um arquivo de texto utilizando o Terraform.
+
+### `main.tf`
+
+```hcl
+terraform {
+  required_providers {
+    local = {
+      source = "hashicorp/local"
+    }
+  }
+}
+
+provider "local" {}
+
+resource "local_file" "exemplo" {
+  filename = "exemplo.txt"
+  content  = "Meu primeiro recurso criado com Terraform!"
+}
+```
+
+### Entendendo o código
+
+O bloco `terraform` define informações necessárias para o funcionamento do projeto, incluindo os providers utilizados.
+
+```hcl
+terraform {
+  required_providers {
+    local = {
+      source = "hashicorp/local"
+    }
+  }
+}
+```
+
+O **provider** é responsável por permitir que o Terraform interaja com determinado serviço ou tecnologia.
+
+```hcl
+provider "local" {}
+```
+
+O bloco `resource` define um recurso que será gerenciado pelo Terraform.
+
+```hcl
+resource "local_file" "exemplo" {
+```
+
+Neste exemplo, o recurso é um arquivo local.
+
+```hcl
+filename = "exemplo.txt"
+content  = "Meu primeiro recurso criado com Terraform!"
+```
+
+Essas propriedades definem o nome e o conteúdo do arquivo que será criado.
+
+---
+
+# 6. Inicializando o projeto
+
+Depois de criar o arquivo `main.tf`, execute:
+
+```bash
+terraform init
+```
+
+O comando `terraform init` inicializa o diretório de trabalho do Terraform.
+
+Durante esse processo, o Terraform identifica os providers necessários e realiza a preparação do projeto.
+
+Depois da execução, novos arquivos e diretórios relacionados ao funcionamento do Terraform poderão aparecer no projeto.
+
+---
+
+# 7. Validando a configuração
+
+Para verificar se os arquivos de configuração estão sintaticamente corretos, utilize:
+
+```bash
+terraform validate
+```
+
+Se a configuração estiver correta, o Terraform informará que ela é válida.
+
+Esse comando é útil antes de executar o planejamento ou aplicar alterações.
+
+---
+
+# 8. Formatando o código
+
+O Terraform possui um comando próprio para padronizar a formatação dos arquivos:
+
+```bash
+terraform fmt
+```
+
+Esse comando reorganiza a formatação dos arquivos `.tf` de acordo com o padrão utilizado pelo Terraform.
+
+É recomendado executar o comando antes de realizar um commit:
+
+```bash
+terraform fmt
+```
+
+---
+
+# 9. Visualizando o plano de execução
+
+Antes de aplicar qualquer alteração, é possível visualizar o que o Terraform pretende realizar utilizando:
+
+```bash
+terraform plan
+```
+
+O `terraform plan` apresenta as alterações que serão realizadas sem aplicá-las.
+
+Esse processo permite analisar o planejamento antes da modificação da infraestrutura.
+
+O Terraform trabalha comparando o estado atual com o estado desejado definido nos arquivos de configuração.
+
+---
+
+# 10. Aplicando a configuração
+
+Depois de analisar o plano, utilize:
+
+```bash
+terraform apply
+```
+
+O Terraform apresentará as alterações que serão realizadas e solicitará confirmação.
+
+Para confirmar a execução, digite:
+
+```text
+yes
+```
+
+Após a confirmação, o Terraform realizará as alterações necessárias para alcançar o estado definido no código.
+
+No exemplo deste guia, será criado:
+
+```text
+exemplo.txt
+```
+
+com o conteúdo:
+
+```text
+Meu primeiro recurso criado com Terraform!
+```
+
+---
+
+# 11. Visualizando o estado
+
+O Terraform mantém informações sobre os recursos que estão sendo gerenciados.
+
+Por padrão, essas informações são armazenadas no arquivo:
+
+```text
+terraform.tfstate
+```
+
+Esse arquivo relaciona os recursos reais gerenciados pelo Terraform com a configuração definida no código.
+
+Para visualizar informações sobre o estado atual, utilize:
+
+```bash
+terraform show
+```
+
+O arquivo de estado é uma parte importante do funcionamento do Terraform e deve ser tratado com cuidado, principalmente quando o projeto é armazenado em um repositório Git.
+
+### Listando os recursos do estado
+
+Também é possível listar os recursos atualmente registrados no estado utilizando:
+
+```bash
+terraform state list
+```
+
+---
+
+# 12. Outputs
+
+Os `outputs` permitem apresentar informações produzidas pelo Terraform.
+
+Por exemplo, podemos criar:
+
+```text
+outputs.tf
+```
+
+com:
+
+```hcl
+output "nome_arquivo" {
+  value = local_file.exemplo.filename
+}
+```
+
+Depois de aplicar a configuração:
+
+```bash
+terraform apply
+```
+
+podemos consultar o output com:
+
+```bash
+terraform output
+```
+
+Ou consultar um output específico:
+
+```bash
+terraform output nome_arquivo
+```
+
+---
+
+# 13. Variáveis
+
+As variáveis permitem evitar valores fixos diretamente no código.
+
+Crie um arquivo:
+
+```text
+variables.tf
+```
+
+Exemplo:
+
+```hcl
+variable "nome_arquivo" {
+  description = "Nome do arquivo que será criado"
+  type        = string
+  default     = "exemplo.txt"
+}
+```
+
+No `main.tf`, podemos utilizar a variável:
+
+```hcl
+resource "local_file" "exemplo" {
+  filename = var.nome_arquivo
+  content  = "Meu primeiro recurso criado com Terraform!"
+}
+```
+
+A referência:
+
+```hcl
+var.nome_arquivo
+```
+
+utiliza o valor definido na variável.
+
+---
+
+# 14. Estrutura utilizando variáveis e outputs
+
+Um projeto Terraform pode ser organizado da seguinte maneira:
+
+```text
+terraform-exemplo/
+├── main.tf
+├── variables.tf
+├── outputs.tf
+└── terraform.tfstate
+```
+
+### `main.tf`
+
+Responsável principalmente pela definição dos recursos.
+
+### `variables.tf`
+
+Responsável pela definição das variáveis utilizadas no projeto.
+
+### `outputs.tf`
+
+Responsável pelas informações que serão apresentadas como saída.
+
+### `terraform.tfstate`
+
+Arquivo utilizado pelo Terraform para armazenar informações relacionadas ao estado da infraestrutura.
+
+---
+
+# 15. Destruindo os recursos
+
+Quando não for mais necessário manter os recursos criados pelo Terraform, utilize:
+
+```bash
+terraform destroy
+```
+
+O Terraform apresentará os recursos que serão removidos e solicitará confirmação.
+
+Digite:
+
+```text
+yes
+```
+
+para confirmar.
+
+No exemplo deste guia, o arquivo criado pelo Terraform será removido.
+
+> **Atenção:** `terraform destroy` deve ser utilizado com cuidado, principalmente em ambientes reais, pois ele pode remover recursos gerenciados pelo Terraform.
+
+---
+
+# 16. Ciclo básico de utilização
+
+O fluxo básico de trabalho pode ser representado da seguinte maneira:
+
+```text
+Criar arquivos .tf
+       ↓
+terraform init
+       ↓
+terraform fmt
+       ↓
+terraform validate
+       ↓
+terraform plan
+       ↓
+terraform apply
+       ↓
+Infraestrutura / recursos
+       ↓
+terraform show
+       ↓
+terraform state list
+       ↓
+terraform destroy
+```
+
+---
+
+# 17. Principais comandos
+
+| Comando              | Função                                      |
+| -------------------- | ------------------------------------------- |
+| `terraform init`     | Inicializa o projeto e prepara os providers |
+| `terraform fmt`      | Formata os arquivos Terraform               |
+| `terraform validate` | Valida a configuração                       |
+| `terraform plan`     | Mostra as alterações planejadas             |
+| `terraform apply`    | Aplica as alterações                        |
+| `terraform show`     | Exibe informações sobre o estado            |
+| `terraform state list` | Lista os recursos registrados no estado |
+| `terraform output`   | Exibe os outputs                            |
+| `terraform destroy`  | Remove os recursos gerenciados              |
+
+---
+
+# 18. Providers
+
+Providers são componentes que permitem ao Terraform interagir com diferentes serviços e tecnologias.
+
+Eles podem permitir o gerenciamento de recursos em diferentes provedores de infraestrutura, como:
+
+* AWS;
+* Microsoft Azure;
+* Google Cloud;
+* VMware;
+* entre outros.
+
+No exemplo deste guia utilizamos:
+
+```hcl
+required_providers {
+  local = {
+    source = "hashicorp/local"
+  }
+}
+```
+
+O provider define a tecnologia que será utilizada para criar e gerenciar os recursos.
+
+---
+
+# 19. Resources
+
+Os `resources` representam os elementos que serão criados ou gerenciados pelo Terraform.
+
+Exemplo:
+
+```hcl
+resource "local_file" "exemplo" {
+  filename = "exemplo.txt"
+  content  = "Meu primeiro recurso criado com Terraform!"
+}
+```
+
+A estrutura básica é:
+
+```hcl
+resource "TIPO" "NOME" {
+  configuração
+}
+```
+
+No exemplo:
+
+```text
+Tipo: local_file
+Nome: exemplo
+```
+
+---
+
+# 20. Modelo declarativo
+
+O Terraform utiliza uma abordagem declarativa.
+
+Em vez de informar detalhadamente cada comando necessário para criar uma infraestrutura, o usuário define **qual estado deseja alcançar**.
+
+Por exemplo:
+
+```hcl
+resource "local_file" "exemplo" {
+  filename = "exemplo.txt"
+  content  = "Meu primeiro recurso criado com Terraform!"
+}
+```
+
+O código descreve o recurso desejado e o Terraform determina as ações necessárias para alcançar esse estado.
+
+---
+
+# 21. Terraform e Infraestrutura como Código
+
+A Infraestrutura como Código (IaC) permite gerenciar infraestrutura por meio de arquivos de definição.
+
+Entre os benefícios apresentados no conteúdo da aula estão:
+
+* **Versionamento:** o código pode ser armazenado em sistemas como Git;
+* **Velocidade:** ambientes podem ser provisionados de maneira automatizada;
+* **Documentação:** o próprio código representa a infraestrutura;
+* **Escalabilidade:** permite gerenciar múltiplos recursos de forma consistente.
+
+---
+
+# 22. Terraform no mercado
+
+O Terraform é utilizado principalmente para **provisionamento e gerenciamento de infraestrutura**.
+
+Entre os usos estão:
+
+* Criação de recursos em nuvem;
+* Provisionamento de máquinas virtuais;
+* Configuração de redes;
+* Gerenciamento de recursos de infraestrutura;
+* Automação de ambientes;
+* Criação de ambientes reproduzíveis;
+* Integração com processos de CI/CD.
+
+No contexto de infraestrutura moderna, o Terraform pode ser utilizado para definir a infraestrutura como código e manter sua configuração versionada.
+
+---
+
+# 23. Terraform x ferramentas de configuração
+
+O Terraform possui foco principalmente no **provisionamento da infraestrutura**.
+
+| Característica | Terraform                   | Ansible                          |
+| -------------- | --------------------------- | -------------------------------- |
+| Foco           | Provisionamento             | Configuração e automação         |
+| Linguagem      | HCL                         | YAML                             |
+| Modelo         | Declarativo                 | Híbrido                          |
+| Agente         | Não                         | Não                              |
+| Exemplo        | Criar VMs, redes e recursos | Instalar e configurar aplicações |
+
+Conforme o conteúdo apresentado em aula, o Terraform atua principalmente na criação da infraestrutura, enquanto ferramentas como Ansible são utilizadas para configurar o software dentro dessa infraestrutura.
+
+---
