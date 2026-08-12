@@ -781,5 +781,37 @@ Cada integrante do grupo desenvolveu um exemplo prático, disponível na pasta `
 
 # 26. Referências
 
-* Documentação oficial do Terraform — https://developer.hashicorp.com/terraform
-* Documentação do provider local — https://registry.terraform.io/providers/hashicorp/local/latest/docs
+* Documentação oficial do Terraform - https://developer.hashicorp.com/terraform
+* Instalação do Terraform - https://developer.hashicorp.com/terraform/install
+* Documentação do provider local - https://registry.terraform.io/providers/hashicorp/local/latest/docs
+* Material da disciplina sobre Gerencia de Configuração e Automação
+* Documentação oficial relacionada a infraestrutura como Código (IaC)
+
+---
+
+# 27. `.gitignore`
+
+Arquivos relacionados ao funcionamento local do Terraform não devem ser adicionados indiscriminadamente ao Git.
+
+O `.gitignore` utilizado neste projeto é:
+
+```gitignore
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+crash.log
+terraform.txt
+```
+
+> O `.gitignore` deve ser analisado de acordo com a estratégia de versionamento adotada pelo projeto. Em projetos reais, o arquivo `.terraform.lock.hcl` normalmente pode ser versionado para registrar as versões dos providers utilizadas — neste projeto optamos por ignorá-lo, já que cada integrante gera o seu localmente.
+
+---
+
+# 28. Conclusão
+
+O Terraform permite definir e gerenciar infraestrutura utilizando código, possibilitando maior automação, padronização, repetibilidade e controle das alterações.
+
+Seu fluxo básico envolve definir os recursos desejados, inicializar o projeto, validar a configuração, visualizar o plano de execução, aplicar as alterações e, quando necessário, destruir os recursos.
+
+O objetivo deste guia foi apresentar esse fluxo de forma prática, permitindo que novos usuários possam criar seu primeiro projeto e compreender os principais comandos utilizados no Terraform.
